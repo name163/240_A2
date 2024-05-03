@@ -1,4 +1,5 @@
 // V2: Moving the boat across the screen, adding delay to the loop
+// Made it into a function for easier reading
 
 PImage boat, ocean_1, ocean_2, ocean;
 int frame_counter = 0;
@@ -23,6 +24,21 @@ void draw() {
     imageMode(CORNER);
     image(ocean, 0, 0);
     
+    // Moves boat
+    boat_move();
+}
+
+// Changing background every 30 frames (half a second)
+void change_background() {
+    if (frame_counter%60==30) {
+        ocean = ocean_2;
+    }
+    else if (frame_counter%60==0) {
+        ocean = ocean_1;
+    }
+}
+
+void boat_move() {
     if (pause==false) {
         image(boat, boat_x, 400);
         boat_x-=boat_speed;
@@ -40,16 +56,5 @@ void draw() {
         } else {
             pause_counter--;
         }
-    }
-    
-}
-
-// Changing background every 30 frames (half a second)
-void change_background() {
-    if (frame_counter%60==30) {
-        ocean = ocean_2;
-    }
-    else if (frame_counter%60==0) {
-        ocean = ocean_1;
     }
 }
