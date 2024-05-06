@@ -36,10 +36,10 @@ void draw() {
 // Changing background every 30 frames (half a second)
 void change_background() {
     if (frame_counter%60==30) {
-        ocean = ocean_2;
+        ocean_alternate = ocean_dense;
     }
     else if (frame_counter%60==0) {
-        ocean = ocean_1;
+        ocean_alternate = ocean_sparse;
     }
 }
 
