@@ -1,20 +1,25 @@
 // V2: Moving the boat across the screen, adding delay to the loop
 // Made it into a function for easier reading
 
-PImage boat, ocean_1, ocean_2, ocean;
+PImage boat;
+PImage ocean_sparse;
+PImage ocean_dense;
+PImage ocean_alternate;
+
 int frame_counter = 0;
 int boat_speed = 3;
 int boat_x = 1000;
 int pause_counter;
+
 boolean pause = false;
 
 void setup() {
     size(1000, 1000);
 
     boat = loadImage("Assets/boat.png");
-    ocean_1 = loadImage("Assets/ocean_1.png");
-    ocean_2 = loadImage("Assets/ocean_2.png");
-    ocean = ocean_1;
+    ocean_sparse = loadImage("Assets/ocean_1.png");
+    ocean_dense = loadImage("Assets/ocean_2.png");
+    ocean_alternate = ocean_sparse;
 }
 
 void draw() {
@@ -22,7 +27,7 @@ void draw() {
     // Every 30 seconds the background changes
     change_background();
     imageMode(CORNER);
-    image(ocean, 0, 0);
+    image(ocean_alternate, 0, 0);
     
     // Moves boat
     boat_move();
@@ -46,8 +51,7 @@ void boat_move() {
         // If boat goes past left side of screen
         if (boat_x < -301) {
             boat_x = 1000;  // Reset boat position
-            pause = true;   // Pause
-            pause_counter=120;    // Delay reset
+            pause_boat();
         }
     } else {
         // If counter runs out
@@ -57,4 +61,9 @@ void boat_move() {
             pause_counter--;
         }
     }
+}
+
+void pause_boat() {
+    pause = true;   // Pause
+    pause_counter=120;    // Delay reset
 }
