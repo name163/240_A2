@@ -6,7 +6,6 @@ PImage ocean_sparse;
 PImage ocean_dense;
 PImage ocean_alternate;
 PImage oil_spill;
-ArrayList<PImage> rocks = new ArrayList<PImage>();
 
 int frame_counter = 0;
 int boat_speed = 3;
@@ -20,7 +19,6 @@ void setup() {
 
     boat = loadImage("Assets/boat.png");
     oil_spill = loadImage("Assets/oil_spill.png");
-    rocks.add(loadImage("Assets/rock.png"));
 
     ocean_sparse = loadImage("Assets/ocean_1.png");
     ocean_dense = loadImage("Assets/ocean_2.png");
@@ -33,7 +31,6 @@ void draw() {
     change_background();
     imageMode(CORNER);
     image(ocean_alternate, 0, 0);
-    draw_rocks();
     
     // Moves boat
     boat_move();
@@ -82,12 +79,6 @@ void draw_spill() {
     tint(255, 250);
     image(oil_spill, boat_x+251, 0);
     tint(255, 255);
-}
-
-void draw_rocks() {
-    for (int i = 0; i<rocks.size(); i++) {
-        image(rocks.get(i), 300, 200);
-    }
 }
 
 void pause_boat() {
