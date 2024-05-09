@@ -12,6 +12,8 @@ int boat_speed = 3;
 int boat_x = 1000;
 int pause_counter;
 
+float spill_opacity = 250;
+
 boolean pause = false;
 
 void setup() {
@@ -63,9 +65,13 @@ void boat_move() {
     } else {
         // If counter runs out
         if (pause_counter==0) {
+            spill_opacity = 250;
             boat_x = 1000;  // Reset boat position to beginning of GIF
             pause = false;
         } else {
+            if (pause_counter < 60) {
+                spill_opacity -= 250/60;
+            }
             pause_counter--;
         }
     }
@@ -76,7 +82,7 @@ void draw_boat() {
 }
 
 void draw_spill() {
-    tint(255, 250);
+    tint(255, spill_opacity);
     image(oil_spill, boat_x+251, 0);
     tint(255, 255);
 }
